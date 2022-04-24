@@ -17,7 +17,9 @@ RUN BUILD_DEPENDENCIES=" \
     && cd n2n \
     && git fetch --all \
     && git checkout 3.0-stable \
-    && make supernode \
+    && ./autogen.sh \
+    && ./configure \
+    && make \
     && cp supernode /usr/bin/supernode \
     && apk del ${BUILD_DEPENDENCIES} \
     && rm -rf /var/cache/apk/* \

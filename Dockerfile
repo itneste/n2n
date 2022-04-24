@@ -15,7 +15,7 @@ RUN BUILD_DEPENDENCIES=" \
     && cd /tmp \
     && git clone https://github.com/ntop/n2n.git n2n \
     && cd n2n \
-    && git checkout 2.4-stable \
+    && git checkout 3.0-stable \
     && make supernode \
     && cp supernode /usr/bin/supernode \
     && apk del ${BUILD_DEPENDENCIES} \

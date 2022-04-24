@@ -1,6 +1,7 @@
 FROM alpine:latest
 
 ENV LISTENING_PORT=7654
+ENV ARGUMENTS=""
 
 EXPOSE ${LISTENING_PORT}
 
@@ -21,4 +22,4 @@ RUN BUILD_DEPENDENCIES=" \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 
-CMD /usr/bin/supernode -l ${LISTENING_PORT}
+CMD /usr/bin/supernode -l ${ARGUMENTS}

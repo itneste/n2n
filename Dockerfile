@@ -22,4 +22,4 @@ RUN BUILD_DEPENDENCIES=" \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 
-CMD /usr/bin/supernode -l ${ARGUMENTS}
+CMD /usr/bin/supernode ${ARGUMENTS}

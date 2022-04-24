@@ -10,4 +10,4 @@ FROM alpine:latest
 ENV ARGUMENTS=""
 COPY --from=0 /usr/sbin/supernode /usr/sbin
 COPY --from=0 /usr/sbin/edge /usr/sbin
-CMD /usr/sbin/supernode ${ARGUMENTS}
+CMD /usr/sbin/supernode

@@ -7,7 +7,12 @@ WORKDIR /opt/n2n
 RUN ./autogen.sh && ./configure && make && make install
 
 FROM alpine:latest
-ENV ARGUMENTS=""
+ENV PARAMETER "-v"
 COPY --from=0 /usr/sbin/supernode /usr/sbin
 COPY --from=0 /usr/sbin/edge /usr/sbin
-CMD /usr/sbin/supernode
+COPY startup.sh /
+
+EXPOSE 7654/udp
+EXPOSE 5645/udp
+
+CMD ["/startup.sh"]

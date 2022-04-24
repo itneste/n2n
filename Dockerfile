@@ -1,28 +1,13 @@
 FROM alpine:latest
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+RUN apk add --no-cache git bash autoconf automake gcc make musl-dev pkgconfig linux-headers
+WORKDIR /opt
+RUN git clone https://github.com/ntop/n2n.git -b 3.0-stable
+WORKDIR /opt/n2n
+RUN ./autogen.sh && ./configure && make && make install
 
-ENV LISTENING_PORT=7654
+FROM alpine:latest
 ENV ARGUMENTS=""
-
-EXPOSE ${LISTENING_PORT}
-
-RUN BUILD_DEPENDENCIES=" \
-        build-base \
-        git \
-        linux-headers \
-        openssl-dev \
-    "; set -x \
-    && apk add ${BUILD_DEPENDENCIES} \
-    && cd /tmp \
-    && git clone https://github.com/ntop/n2n.git n2n \
-    && cd n2n \
-    && git fetch --all \
-    && git checkout 3.0-stable \
-    && ./autogen.sh \
-    && ./configure \
-    && make \
-    && cp supernode /usr/bin/supernode \
-    && apk del ${BUILD_DEPENDENCIES} \
-    && rm -rf /var/cache/apk/* \
-    && rm -rf /tmp/*
-
-CMD /usr/bin/supernode ${ARGUMENTS}
+COPY --from=0 /usr/sbin/supernode /usr/sbin
+COPY --from=0 /usr/sbin/edge /usr/sbin
+CMD /usr/sbin/supernode ${ARGUMENTS}

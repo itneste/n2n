@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/bin/supernode -f $PARAMETER
+/usr/sbin/supernode -f $PARAMETER

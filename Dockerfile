@@ -11,7 +11,7 @@ ENV PARAMETER "-v"
 COPY --from=builder /usr/sbin/supernode /usr/bin
 COPY --from=builder /usr/sbin/edge /usr/bin
 COPY startup.sh /
-
+RUN chomd -R 777 /startup.sh
 EXPOSE 7654/udp
 EXPOSE 5645/udp
 

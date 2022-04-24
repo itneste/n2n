@@ -11,6 +11,7 @@ ENV PARAMETER "-v"
 COPY --from=0 /usr/sbin/supernode /usr/sbin
 COPY --from=0 /usr/sbin/edge /usr/sbin
 COPY startup.sh /
+RUN chmod -R 777 /startup.sh
 
 EXPOSE 7654/udp
 EXPOSE 5645/udp
